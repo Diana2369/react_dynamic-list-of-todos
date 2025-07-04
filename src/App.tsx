@@ -12,9 +12,10 @@ import { TodoModal } from './components/TodoModal';
 import { Loader } from './components/Loader';
 
 export const App: React.FC = () => {
-  const [todos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  /* eslint-disable @typescript-eslint/indent */
   const [statusFilter, setStatusFilter] = useState<
     'all' | 'active' | 'completed'
   >('all');
@@ -24,9 +25,11 @@ export const App: React.FC = () => {
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isUserLoading, setIsUserLoading] = useState(false);
+  /* eslint-enable @typescript-eslint/indent */
 
   useEffect(() => {
     getTodos()
+      .then(data => setTodos(data))
       // eslint-disable-next-line no-console
       .catch(error => console.error(error))
       .finally(() => setIsLoading(false));
